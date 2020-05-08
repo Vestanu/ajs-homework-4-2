@@ -1,5 +1,5 @@
 /* eslint-disable import/extensions */
-import findBy from '../src/main.js';
+import findBy from '../src/findBy.js';
 
 
 test('Функция показывает первую строку массива при поиске слова маг', () => {
@@ -9,8 +9,8 @@ test('Функция показывает первую строку массив
     { name: 'урон', type: 'help', description: 'Страница описания элемента интерфейса' },
   ];
 
-  const findItem = findBy(arr, 'маг');
-  expect(findItem).toEqual([{ name: 'маг', type: 'character', description: 'Персонаж, обладающий магическими способностями' }]);
+  const findItem = findBy('name', 'маг');
+  expect(arr.filter(findItem)).toEqual([{ name: 'маг', type: 'character', description: 'Персонаж, обладающий магическими способностями' }]);
 });
 
 test('Функция показывает вторую строку массива при поиске заклинания', () => {
@@ -20,8 +20,8 @@ test('Функция показывает вторую строку массив
     { name: 'урон', type: 'help', description: 'Страница описания элемента интерфейса' },
   ];
 
-  const findItem = findBy(arr, 'заклинание');
-  expect(findItem).toEqual([{ name: 'заклинание', type: 'attack', description: 'Атака магическим заклинанием' }]);
+  const findItem = findBy('name', 'заклинание');
+  expect(arr.filter(findItem)).toEqual([{ name: 'заклинание', type: 'attack', description: 'Атака магическим заклинанием' }]);
 });
 
 test('Функция показывает третью строку массива при поиске слова урон', () => {
@@ -31,17 +31,17 @@ test('Функция показывает третью строку массив
     { name: 'урон', type: 'help', description: 'Страница описания элемента интерфейса' },
   ];
 
-  const findItem = findBy(arr, 'урон');
-  expect(findItem).toEqual([{ name: 'урон', type: 'help', description: 'Страница описания элемента интерфейса' }]);
+  const findItem = findBy('name', 'урон');
+  expect(arr.filter(findItem)).toEqual([{ name: 'урон', type: 'help', description: 'Страница описания элемента интерфейса' }]);
 });
 
-test('При неверном поиске выдает ошибку', () => {
+test('При неверном поиске выдает пустой массив', () => {
   const arr = [
     { name: 'маг', type: 'character', description: 'Персонаж, обладающий магическими способностями' },
     { name: 'заклинание', type: 'attack', description: 'Атака магическим заклинанием' },
     { name: 'урон', type: 'help', description: 'Страница описания элемента интерфейса' },
   ];
 
-  const findItem = findBy(arr, 'привет');
-  expect(findItem).toEqual([]);
+  const findItem = findBy('name', 'привет');
+  expect(arr.filter(findItem)).toEqual([]);
 });
